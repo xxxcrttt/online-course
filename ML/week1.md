@@ -30,3 +30,6 @@ Example: SPAM
 ### Model and Cost Function 
 
 #### Model Representation 
+x(i): input, y(i): output ==> (xi, yi): training example     
+training set: (xi, yi); i = 1, 2, ... m    
+
