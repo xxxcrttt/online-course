@@ -147,3 +147,35 @@ A: Virtual Machine -- A service account is a special kind of account used by an 
 **Q2.** What provides access control to GC resources?   
 A: Policies -- it is managed by IAM policies, which are attached to resources. 
 
+### Infrasctructure Security 
+#### Different computing services 
+Compute Service offer multiple infrastructure and plat form services to handle the traffic and workload for all Google users.     
+1. Compute Engine -- Virtual Machines 
+2. App Engine -- Scalable web and mobile back end
+3. Kubernetes Engine -- Container services 
+4. Cloud Functions -- Lightweight compute solutions 
+
+**Google Compute Engine(GCE)**     
+Infrastructure as a service, create and manage virtual machines. Instances = Virtual Machine.     
+Customer is responsible for full configuration lifecycle: ```creating instance, pick operating system, processors, RAM, Install and manage applications, update security patches```.   
+Use preemptible(抢占式多任务处理 multi-task, 操作系统完全决定进程的调度方案) instances for cost savings.     
+
+**Google App Engine**   
+Platform as a services. Build, develop and host web applications. Great option for high-reliability, high-performance applications.   
+Support multiple languages: ```Go, PHP, Java, Python```. Environment: standard and flexible. 
+
+#### Compute service best practices 
+**Defence-in-Depth Approach** (Information strategy)     
+* Series of defense mechanisms and controls are layered throughout the network to protect data. 
+* Securing services using identity and access management policies. 
+* Secure network, use firewalls, load balance or encrypt. 
+
+1. Isolate your production resources from the internet. 
+2. Disable default service accounts. 
+3. Apply the principle of least privilege. -- IAM recommander 
+4. Enable log collection and monitor your systems. 
+
+**Q1.** What service is the customer responsible for configuring, administering, and monitoring?    
+A: Google Compute Engine -- GCE falls under the IaaS category, customers are responsible for the full configuration lifecycle of the service.
+
+
