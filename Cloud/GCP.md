@@ -178,4 +178,102 @@ Support multiple languages: ```Go, PHP, Java, Python```. Environment: standard a
 **Q1.** What service is the customer responsible for configuring, administering, and monitoring?    
 A: Google Compute Engine -- GCE falls under the IaaS category, customers are responsible for the full configuration lifecycle of the service.
 
+### Network Security 
+#### Create a network using virtual private clouds(VPCs)
+VPC: a virtual version of a physical network; offers same services as a physical network but virtualized for cloud environment.
+
+VPC Benefits:   
+* Considered a global resource, an instance with an IP address in any zone or region can communicate privately with each other within the same project, creating a global wide area network.
+* Flexible and scalable.
+* Shareable and provide isolation, can build an entire virtual network for the organization but still enforce isolation for teams.
+
+1. In order to create a VPC, you must create a project -- logical control for billing and organization within the nevironment. Each project created has its own VPC. 
+2. VPC are made up subnets -- logical subdivisions of an IP network. Subnets are a regional resource -- can only span within the same region. It is defined by a range of IP addresses. 
+3. Firewall rules control network traffic flow. Firewall rules are enforced at the instance level. 
+4. VPC peering -- allows internet resources to connect to other VPC networks; regardless if in the same project or organization.  Great option for organizations with multiple networks that need to communicate privately. 
+
+#### How to build firewall rules
+Firewall rules take action on the network traffic attemping to flow in and out of the network.    
+Rules take the form of **allow** or **deny**. Rules can apply different types of ```traffic, protocal, port , services, or destinations.```
+
+1. Firewall rules are stateful and always enforced, regardless the operating system or the VM is trun on or off. 
+2. Rules are enforced at Instance, or virtual machine level. Serve as an isolation mechanism between virtual machines and other networks. Enforce isolation between one or more virtual machines. 
+3. Google has predefined rules. 
+* Your default network has 2 implied firewall rules: 
+```
+Outgoing connections = Allowed 
+Incoming connections = Blocked
+```
+* Default rules can be overriden with higher priority firewall rules. A rule set with priority 0 is highest firewall rule. 
+* SMTP(Simple Mail Transfer Protocol), associated with port 25, is always blocked. 
+* DHCP(Dynamic Host Control Protocol), associated with port 67, is always allowed. 
+
+#### Networking Best Practice 
+* Ensure your environment is **manageable, reliable, and well understood** by everyone. 
+* Use clear naming conventions for network resources. (Abbreviation and familiar terminology; Company name, business units, application code, region, status;)
+* Utilize custom networks instead of default ones for production environments. 
+* Segment and isolate sensitive data in separate VPC networks. 
+* Utilize Google Cloud VPC FLow Logs for networking monitoring. -- Flow Logs are a networking service that records a sample of network flows sent to and from VMs.
+* **Load balancer**: high-performance, scalable load balancing
+* **Cloud Security Command Center**: security and risk management 
+* **Cloud Armor**: network security service to defend against DDoS and app attacks. 
+* **Cloud Identity Aware Procy**: uses identity and context to guard against apps and Vms. 
+
+**Q1.** VPCs are a global resource, meaning an instance with an IP address, in any zone or region, can communicate privately with each other within the same project. Subnets are only regional resources.
+
+**Q2.** How can you control the traffic coming into instances in your Google Cloud Network?   
+A: Use firewall rules. -- Firewall Rules enable you to either allow or deny network traffic connections, to and from, your virtual machine resources based on your specific needs.
+
+### Data Security
+
+#### Understanding cloud storage
+```Objects, Buckets, Projects, Organizations.``` 
+* Objects -- An immutable(cannot be changed, only replayed with a new version) piece of data consisting of a file of any format. Any data uploaded to Cloud Storage. 
+* Buckets -- Containers that store your objects. 
+
+#### Encryption 
+-- prevent harm to your data when stored in a public cloud.    
+The process of converting information(plaintext) into an unrecognizable form(cipertext), especially to prevent unauthorized acces.. 
+* CGP Service-Side Encryption:     
+By default, data is encrypted on the server side before written to disk.    
+Encryption that occurs after Google receives the data, but before the data is stored to Google's servers. 
+* Additional Cloud Storage Encryption:    
+1. Customer-supplied encryption keys(CSEK) -- Customer is responsible for encryption lifecycle, create and manage encryption keys. Google does not store keys on server. Only cryptographic hash is stored.       
+2. Customer-managed encryption keys(CMEK) -- Google creates and managed encryption keys using Cloud Key Management Service(KMS), KMS is a cloud-hosted key management service.    
+* Google does **NOT** handle client-side encryption. Client-side encryption is when your data is encrypted prior to being received by Google.   
+
+#### Best Practices
+* Do not use useer IDs, emails, project numbers, or names, or any personally identifiable information (PII) in the name of your cloud buckest or cloud projects. 
+* Store your data in a region closest to your application users. 
+* Never share credentials with anyone else. 
+* Always use TLS(HTTPS) protocol to transport your data. 
+* Protect against Accidental or Malicious Deletion -- Place retention policies on your buckets. Create object holds to prevent deletion until hold is removed. Use object versioning. 
+
+
+**Q1.** The IT term for a university is moving documents and database to GCP, they want ot ensure maximum control over the encryption process of data stored at rest in Cloud Storage.   
+A: Customer-supplied encryption keys(CSEK) -- it provides more control of the security of the encryption keys. 
+
+**Q2.** making changes to an object stored in Cloud Storage:   
+A: Objects are immutable(they can not be changed once upload) and therefore you must upload a new version to overwrite the existing one.
+
+### Security Operations
+#### Security Command Center
+```Gather data, identify threates, Act on threats in the platform, Build-in services for full visibility```
+* It enables enterprises to gain holistic views of your assets(GCP resources and security risks) with a focus on assets inventory, discovery search and management. 
+* Key features: ```Assets discovery and inventory, sensitive data identification, application vulnerability detection, access control monitoring, anomaly detection```
+* You can integrate third-party security tool with Security Command Center ro centralize your security management. 
+* Security Command Center girves a centralized security managed to improve security posture. 
+
+#### Security Operations Suite 
+-- Combining operational processes from different business units.    
+Cloud Operations: ```Full visibility, Loggings, Monitoring```    
+* Use Google Cloud operations suite to monitor and log your data. 
+* GCOS: formerly known as Stackdriver, it is a set of tools designed to help businesses -- Monitor, Troubleshoot, improve application performance/ 
+* Logging: Fully managed service, collects all of the events into a single location. Data sources include Compute Engine instances, custom logs, and API; can expoprt logs to other services or third parties. 
+* Monitoring: Fullt managed service, collects metrics, envents, and metadata to provide insight into the applications. Services include GCP, other Cloud service providers, and on-premises. 
+* APM(Application Performance Monitoring): Offers advanced ovservability, includes ```Cloud Trace, Cloud Debugger, Cloud Profiler.```
+1. Trace: Find bottlenecks occuring in environment and identify root cause. 
+2. Debugger: Inspect state of running application without impacting user experience. 
+3. Profiler: Gather usage to identify application performance issues. 
+
 
